@@ -53,11 +53,11 @@ class AmqpTransport extends Logger implements TransportIntarface
 	 */
 	public function loadOptions($transportOptions)
 	{
-		$this->host = ArrayHelper::getValue($transportOptions, self::DEFAULT_HOST);
-		$this->login = ArrayHelper::getValue($transportOptions, self::DEFAULT_LOGIN);
-		$this->passsword = ArrayHelper::getValue($transportOptions, self::DEFAULT_PASSWORD);
-		$this->exchange = ArrayHelper::getValue($transportOptions, self::DEFAULT_EXCHANGE);
-		$this->queue = ArrayHelper::getValue($transportOptions, self::DEFAULT_QUEUE);
+		$this->host = ArrayHelper::getValue($transportOptions, 'host', self::DEFAULT_HOST);
+		$this->login = ArrayHelper::getValue($transportOptions, 'login', self::DEFAULT_LOGIN);
+		$this->passsword = ArrayHelper::getValue($transportOptions, 'passsword', self::DEFAULT_PASSWORD);
+		$this->exchange = ArrayHelper::getValue($transportOptions, 'exchange', self::DEFAULT_EXCHANGE);
+		$this->queue = ArrayHelper::getValue($transportOptions, 'queue', self::DEFAULT_QUEUE);
 	}
 
 	/**
@@ -66,7 +66,7 @@ class AmqpTransport extends Logger implements TransportIntarface
 	 */
 	public function checkType($type)
 	{
-		return $type == 'tcp';
+		return $type == 'amqp';
 	}
 
 	/**

@@ -7,5 +7,5 @@ interface TransportIntarface
 
 	public function checkType($type);
 
-	public function export();
+	public function export($levels, $logObject);
 }

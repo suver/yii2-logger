@@ -1,27 +1,28 @@
 <?php
 namespace suver\logger\graylog;
 
+use Psr\Log\LogLevel;
 use yii\helpers\ArrayHelper;
 use Gelf;
 use Yii;
+use yii\helpers\VarDumper;
 
 abstract class Logger
 {
 
 	abstract public function getTransport();
 
-	public function export()
+	public function export($levels, $logObject)
 	{
 		$transport = $this->getTransport();
-
 		$publisher = new Gelf\Publisher($transport);
-		foreach ($this->messages as $message) {
+		foreach ($logObject->messages as $message) {
 			list($text, $level, $category, $timestamp) = $message;
 			$gelfMsg = new Gelf\Message;
 			// Set base parameters
-			$gelfMsg->setLevel(ArrayHelper::getValue($this->_levels, $level, LogLevel::INFO))
+			$gelfMsg->setLevel(ArrayHelper::getValue($levels, $level, LogLevel::INFO))
 				->setTimestamp($timestamp)
-				->setFacility($this->facility)
+				->setFacility($logObject->facility)
 				->setAdditional('category', $category)
 				->setFile('unknown')
 				->setLine(0);
@@ -76,7 +77,7 @@ abstract class Logger
 				$gelfMsg->setAdditional('trace', implode("\n", $traces));
 			}
 			// Add username
-			if (($this->addUsername) && (Yii::$app->has('user')) && ($user = Yii::$app->get('user')) && ($identity = $user->getIdentity(false))) {
+			if (($logObject->addUsername) && (Yii::$app->has('user')) && ($user = Yii::$app->get('user')) && ($identity = $user->getIdentity(false))) {
 				$gelfMsg->setAdditional('username', $identity->username);
 			}
 			// Publish message

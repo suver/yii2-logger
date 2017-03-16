@@ -9,26 +9,22 @@ namespace suver\logger;
 use suver\logger\graylog\AmqpTransport;
 use suver\logger\graylog\TcpTransport;
 use suver\logger\graylog\UdpTransport;
-use Yii;
-use yii\helpers\ArrayHelper;
-use yii\helpers\VarDumper;
 use yii\log\Target;
 use yii\log\Logger;
-use Gelf;
 use Psr\Log\LogLevel;
 
 /**
  * GraylogTarget sends log to Graylog2 (in GELF format)
  *
- * @author Roman Ovchinnikov <nex.software@gmail.com>
- * @link https://github.com/RomeroMsk/yii2-graylog2
+ * @author Suver <suver@inbox.ru>
+ * @link https://github.com/suver/yii2-logger
  */
 class GraylogTarget extends Target
 {
 	/**
 	 * @var string Graylog2 transport type
 	 */
-	public $type = 'udp';
+	public $type = 'tcp';
 
 	/**
 	 * @var string default facility name
@@ -73,7 +69,7 @@ class GraylogTarget extends Target
 			if ($transportObject->checkType($this->type))
 			{
 				$transportObject->loadOptions($this->transport);
-				$transportObject->export();
+				$transportObject->export($this->_levels, $this);
 			}
 		}
 	}

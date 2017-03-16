@@ -40,11 +40,15 @@ return [
                     'levels' => ['error', 'warning'],
                 ],
                 'graylog' => [
-                    'class' => 'suver\logger\Target',
+                    'class' => 'suver\logger\GraylogTarget',
                     'levels' => ['error', 'warning', 'info'],
                     'categories' => ['application'],
                     'logVars' => [], // This prevent yii2-debug from crashing ;)
-                    'host' => '127.0.0.1',
+                    'transport' => [
+                        'type' => 'tcp', // udp, amqp
+                        'host' => 'graylog',
+                        'port' => '12201',
+                    ],
                     'facility' => 'facility-name',
                 ],
             ],
