@@ -1,0 +1,24 @@
+{
+    "name": "suver/yii2-logger",
+    "type": "yii2-extension",
+    "description": "log target for Yii2",
+    "keywords": ["yii2", "extension", "log", "log target", "graylog", "graylog2", "gelf"],
+    "homepage": "https://github.com/suver/yii2-logger",
+    "license": "BSD 3-Clause",
+    "authors": [
+        {
+            "name": "Suver",
+            "email": "suver@inbox.ru",
+            "homepage": "http://farpse.com"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*",
+        "graylog2/gelf-php": "~1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "suver\\logger\\": ""
+        }
+    }
+}
