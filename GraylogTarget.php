@@ -43,6 +43,8 @@ class GraylogTarget extends Target
 
 	private $transportList = [];
 
+	public $source = 'port.default';
+
 	/**
 	 * @var array graylog levels
 	 */
