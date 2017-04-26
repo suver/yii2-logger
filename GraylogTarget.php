@@ -70,8 +70,13 @@ class GraylogTarget extends Target
 		{
 			if ($transportObject->checkType($this->type))
 			{
-				$transportObject->loadOptions($this->transport);
-				$transportObject->export($this->_levels, $this);
+				try {
+					$transportObject->loadOptions($this->transport);
+					$transportObject->export($this->_levels, $this);
+				}
+				catch (\Exception $e) {
+					var_dump($e);
+				}
 			}
 		}
 	}
