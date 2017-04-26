@@ -44,8 +44,8 @@ return [
                     'levels' => ['error', 'warning', 'info'],
                     'categories' => ['application'],
                     'logVars' => [], // This prevent yii2-debug from crashing ;)
+                    'type' => 'udp', // tcp, udp, amqp
                     'transport' => [
-                        'type' => 'tcp', // udp, amqp
                         'host' => 'graylog',
                         'port' => '12201',
                     ],
